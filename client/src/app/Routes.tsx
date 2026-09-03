@@ -94,6 +94,7 @@ const AssetGenerators = lazy(
   () => import("./pages/asset-generators/asset-generators")
 );
 
+const AgenticDemo = lazy(() => import("./pages/demo"));
 const AgentRuns = lazy(() => import("./pages/agent-runs"));
 const AgentRunDetails = lazy(
   () => import("./pages/agent-runs/agent-run-detail-page")
@@ -281,6 +282,11 @@ export const migrationRoutes: IRoute<DevPathValues>[] = [
  */
 export const agenticRoutes: IRoute<DevPathValues>[] = isAgenticEnabled
   ? [
+      {
+        path: Paths.agenticDemo,
+        comp: AgenticDemo,
+        exact: true,
+      },
       {
         path: Paths.agentRunDetails,
         comp: AgentRunDetails,

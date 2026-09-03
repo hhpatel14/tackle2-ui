@@ -52,6 +52,7 @@ export const DevPaths = {
 
   dependencies: "/dependencies",
   migrationTargets: "/migration-targets",
+  agenticDemo: "/agentic-demo",
   agentRuns: "/agent-runs",
   agentRunDetails: "/agent-runs/:runName",
   agents: "/agents",

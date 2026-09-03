@@ -409,6 +409,7 @@
     "roles": "Roles",
     "scopes": "Scopes",
     "agentic": "Agentic",
+    "getStarted": "Get started",
     "agentRuns": "Agent runs",
     "agents": "Agents",
     "skills": "Skills",
@@ -491,6 +492,7 @@
     "contributors": "Contributors",
     "controls": "Controls",
     "coordinates": "Coordinates",
+    "copied": "Copied!",
     "create": "Create",
     "createdBy": "Created By",
     "credential": "Credential",
@@ -1158,6 +1160,109 @@
     }
   },
   "agentic": {
+    "demo": {
+      "title": "Agentic demo",
+      "description": "Migrate the sample <strong>coolstore</strong> Java EE application to Quarkus 3 end to end — plan, execute, and verify — driven by AI agents. Complete the three setup steps once, then start the demo and watch it run live.",
+      "setupTitle": "Setup",
+      "setupDone": "You're all set — start the demo below.",
+      "ready": "Ready",
+      "actionNeeded": "Action needed",
+      "checking": "Checking…",
+      "fork": {
+        "title": "Fork the coolstore repository",
+        "body": "The migration pushes a new branch to your own fork of the sample app. Fork it once with the GitHub CLI (or the Fork button on GitHub), then register it below.",
+        "command": "gh repo fork konveyor/coolstore --clone=false",
+        "openGithub": "Open coolstore on GitHub",
+        "detected": "Application \"coolstore\" points at {{url}}",
+        "missing": "No \"coolstore\" application with a source repository was found."
+      },
+      "token": {
+        "title": "Add a GitHub token",
+        "body": "The agent clones and pushes with a GitHub personal access token (repo scope). Store it as a source credential and attach it to the coolstore application.",
+        "manage": "Manage credentials",
+        "openApp": "Open coolstore application",
+        "detected": "A source credential is attached to coolstore.",
+        "missing": "coolstore has no source credential yet."
+      },
+      "provider": {
+        "title": "Configure an AI provider",
+        "body": "Runs call an LLM through a Gateway (Vertex AI, OpenAI, Anthropic, or Bedrock). Add the provider endpoint and its token, then wait for the gateway to report Ready.",
+        "manage": "Manage gateways",
+        "detected": "Gateway \"{{name}}\" is ready.",
+        "missing": "No ready gateway was found."
+      },
+      "start": {
+        "title": "Start the demo",
+        "guided": "Start guided demo",
+        "guidedHint": "A guided pointer walks the whole flow for you — create the app, analyze it, and launch the migration.",
+        "kick": "Kick the demo now",
+        "kickHint": "Skip the walkthrough and launch the coolstore migration run directly.",
+        "blocked": "Finish the setup steps above to enable the demo."
+      },
+      "launcher": {
+        "title": "New to Agentic?",
+        "body": "Take the guided coolstore migration demo.",
+        "open": "Get started",
+        "dismiss": "Dismiss"
+      },
+      "guide": {
+        "title": "What's under the Agentic tab",
+        "intro": "The Agentic tab is where AI agents plan and perform migrations. Here's what each page is for and what you can do there.",
+        "open": "Open",
+        "agentRuns": {
+          "name": "Agent runs",
+          "desc": "Every individual AI agent execution. Open one to watch its live transcript.",
+          "actions": "Create a run, filter by application or phase, and open a run for live logs — where you can reconnect, expand to full screen, steer the agent with a mid-turn message, cancel its turn, or answer its permission prompts."
+        },
+        "agents": {
+          "name": "Agents",
+          "desc": "The catalog of AI agents available to run.",
+          "actions": "Create an agent, edit its parameters, or delete it."
+        },
+        "skills": {
+          "name": "Skills",
+          "desc": "Reusable instructions (skill cards) and bundles (skill collections) that agents draw on.",
+          "actions": "Create skill cards and collections, view their details, edit, or delete them."
+        },
+        "workflows": {
+          "name": "Workflows",
+          "desc": "Multi-stage sequences of agents — for example plan → execute → verify.",
+          "actions": "Create a workflow, run it, edit its stages, or delete it."
+        },
+        "workflowRuns": {
+          "name": "Workflow runs",
+          "desc": "Executions of a workflow against an application — this is what the demo launches.",
+          "actions": "Create a workflow run, re-run a finished one, or open a stage to watch its live agent run."
+        },
+        "gateways": {
+          "name": "Gateways",
+          "desc": "The AI providers (Vertex AI, OpenAI, Anthropic, Bedrock) that runs call.",
+          "actions": "Read-only — gateways are seeded by an administrator."
+        }
+      },
+      "tour": {
+        "navApplications": "Opening the application inventory…",
+        "appExists": "The \"{{name}}\" application already exists — skipping creation.",
+        "openCreate": "Clicking \"Create application\".",
+        "fillForm": "Filling in the name and source repository…",
+        "submitApp": "Saving the \"{{name}}\" application.",
+        "analysis": "Konveyor analysis finds what to migrate. Continuing to the migration workflow…",
+        "navWorkflows": "Opening the Workflows catalog…",
+        "showWorkflow": "This \"{{workflow}}\" workflow already exists — it runs three agent skills in order: plan → execute → verify. We'll reuse it, not build a new one.",
+        "navWorkflowRuns": "Opening workflow runs…",
+        "premadeWorkflow": "Now we'll start a run using that ready-made \"{{workflow}}\" workflow — no setup needed.",
+        "openCreateRun": "Starting a new workflow run.",
+        "fillRun": "Selecting the {{workflow}} workflow for {{name}}…",
+        "submitRun": "Launching the migration run.",
+        "done": "Migration launched — watch it run live!",
+        "pausedTitle": "Guided demo paused",
+        "pausedBody": "Couldn't find the next control automatically. {{detail}}",
+        "stop": "Stop",
+        "resume": "Skip step",
+        "prereqFork": "Register your coolstore fork first (step 1 above).",
+        "prereqProvider": "Configure a ready AI provider first (step 3 above)."
+      }
+    },
     "agentRuns": {
       "createRun": "Create run",
       "emptyTitle": "No agent runs",

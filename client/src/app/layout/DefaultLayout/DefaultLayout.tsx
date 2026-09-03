@@ -4,6 +4,7 @@ import { Page, SkipToContent } from "@patternfly/react-core";
 
 import { Notifications } from "@app/components/Notifications";
 import { PageContentWithDrawerProvider } from "@app/components/PageDrawerContext";
+import { AgenticLauncher } from "@app/components/agentic-launcher/AgenticLauncher";
 import { useTaskManagerContext } from "@app/components/task-manager/TaskManagerContext";
 import { TaskManagerDrawer } from "@app/components/task-manager/TaskManagerDrawer";
 
@@ -49,6 +50,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
       <PageContentWithDrawerProvider>
         {children}
         <Notifications />
+        <AgenticLauncher />
       </PageContentWithDrawerProvider>
     </Page>
   );

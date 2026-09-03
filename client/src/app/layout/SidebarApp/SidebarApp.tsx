@@ -217,6 +217,11 @@ const MigrationSidebar = ({
             isExpanded
           >
             <NavItem>
+              <NavLink to={DevPaths.agenticDemo} activeClassName="pf-m-current">
+                {t("sidebar.getStarted")}
+              </NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink to={DevPaths.agentRuns} activeClassName="pf-m-current">
                 {t("sidebar.agentRuns")}
               </NavLink>

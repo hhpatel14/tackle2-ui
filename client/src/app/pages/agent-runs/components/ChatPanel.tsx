@@ -572,14 +572,21 @@ export function ChatPanel({
   const canIntervene = useHasSomeScopes(agenticSteerScopes);
   const phase = status?.phase;
   const finished = isTerminalPhase(phase);
-  // ACPReady is the one signal to dial on: phase=Running fires when the
-  // sandbox pod runs, before the agent listens, and every controller in
-  // service reports the condition (agentic-controller#160) — the dial
-  // loop that rode out the gap on older controllers is gone.
+  // ACPReady is the signal to dial on when the controller reports it. But
+  // some controller builds in service never emit it (agentic-controller#160)
+  // even though the sandbox is Ready and the hub relay is reachable — the ACP
+  // URL derives from the run name, not this condition. So honor ACPReady when
+  // it is present, and when the condition is absent entirely fall back to
+  // dialing while the run is Running; the connect flow below rides out the
+  // brief gap before the agent starts listening.
   const acpReady = status?.conditions?.find(
     (c) => c.type === ACP_READY_CONDITION
   );
-  const dialable = canOpenSession && !finished && acpReady?.status === "True";
+  const acpReadyReported = acpReady !== undefined;
+  const dialable =
+    canOpenSession &&
+    !finished &&
+    (acpReadyReported ? acpReady.status === "True" : phase === "Running");
 
   const [conn, setConn] = useState<ConnState>({ kind: "connecting" });
   const [items, setItems] = useState<ChatItem[]>([]);
@@ -848,6 +855,7 @@ export function ChatPanel({
       setAttempt((a) => a + 1); // rerun this effect; session/load replays
     };
 
+    let everConnected = false;
     const connect = async () => {
       localSession = await dialAcp({
         getUrl: async () =>
@@ -883,6 +891,7 @@ export function ChatPanel({
         sessionId = await localSession.newSession();
       }
       lastSessionIdRef.current = sessionId;
+      everConnected = true;
       if (live()) {
         setSession(localSession);
         setConn({ kind: "connected", sessionId });
@@ -890,7 +899,15 @@ export function ChatPanel({
     };
 
     connect().catch((err) => {
-      if (live()) setConn({ kind: "failed", message: errorMessage(err) });
+      if (!live()) return;
+      // Fallback dialing (no ACPReady reported) may dial before the agent is
+      // listening. Treat a first-connect failure like a drop so the bounded
+      // reconnect rides out that gap, instead of surfacing a manual retry.
+      if (!acpReadyReported && !everConnected) {
+        handleDrop();
+        return;
+      }
+      setConn({ kind: "failed", message: errorMessage(err) });
     });
 
     return () => {
@@ -903,6 +920,7 @@ export function ChatPanel({
   }, [
     runName,
     dialable,
+    acpReadyReported,
     attempt,
     handleUpdate,
     handlePermission,

@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { AppRoutes } from "./Routes";
 import { NotificationsProvider } from "./components/NotificationsContext";
+import { DemoTourProvider } from "./components/demo-tour/DemoTourContext";
 import { TaskManagerProvider } from "./components/task-manager/TaskManagerContext";
 import { DefaultLayout } from "./layout";
 
@@ -13,9 +14,11 @@ const App: React.FC = () => {
     <BrowserRouter>
       <NotificationsProvider>
         <TaskManagerProvider>
-          <DefaultLayout>
-            <AppRoutes />
-          </DefaultLayout>
+          <DemoTourProvider>
+            <DefaultLayout>
+              <AppRoutes />
+            </DefaultLayout>
+          </DemoTourProvider>
         </TaskManagerProvider>
       </NotificationsProvider>
     </BrowserRouter>

@@ -1,0 +1,92 @@
+.demo-tour-hand {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  font-size: 30px;
+  line-height: 1;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.45));
+}
+
+.demo-tour-ring-anchor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.demo-tour-ring {
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid var(--pf-t--global--color--brand--default, #0066cc);
+  animation: demo-tour-pulse 550ms ease-out forwards;
+}
+
+@keyframes demo-tour-pulse {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+.demo-tour-narration {
+  position: fixed;
+  z-index: 10001;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(760px, calc(100vw - 40px));
+  pointer-events: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
+  animation: demo-tour-narration-in 320ms ease-out;
+}
+
+/* Make the information box read large, bold, and clearly outlined. */
+.demo-tour-narration .pf-v6-c-alert {
+  border: 3px solid var(--pf-t--global--color--brand--default, #0066cc);
+  border-radius: 12px;
+}
+
+.demo-tour-narration .pf-v6-c-alert__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.demo-tour-narration .pf-v6-c-alert__description {
+  font-size: 1.2rem;
+  line-height: 1.55;
+}
+
+/* Replays on each step because the box is re-keyed to its text, so a new
+   beat visibly pops in to draw the eye. */
+@keyframes demo-tour-narration-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(18px) scale(0.96);
+  }
+  60% {
+    transform: translateX(-50%) translateY(0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
